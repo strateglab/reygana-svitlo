@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Звіт щодо ремонту освітлення — 2-й під’їзд</title>
+  <meta name="description" content="Звіт про виконані роботи з ремонту та заміни освітлення у 2-му під’їзді будинку.">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #5d6673;
+      --accent: #1f6feb;
+      --accent-soft: #e8f1ff;
+      --ok: #087f5b;
+      --warn: #b7791f;
+      --border: #d9dee7;
+      --shadow: 0 10px 25px rgba(20, 31, 45, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 280px);
+    }
+    .page { max-width: 1080px; margin: 0 auto; padding: 28px 18px 48px; }
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-inner {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(28px, 5vw, 44px); line-height: 1.08; letter-spacing: -0.03em; }
+    .lead { margin: 0; font-size: 18px; color: var(--muted); }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    }
+    .section {
+      margin-top: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .section h2 { margin: 0 0 16px; font-size: 24px; letter-spacing: -0.02em; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fbfcfe;
+    }
+    .stat .icon { font-size: 28px; margin-bottom: 8px; }
+    .stat strong { display: block; font-size: 28px; line-height: 1; color: var(--accent); margin-bottom: 6px; }
+    .stat span { color: var(--muted); }
+    .done-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .done-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fbfcfe;
+    }
+    .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e6fcf5;
+      color: var(--ok);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+    .note { border-left: 5px solid var(--warn); background: #fff8e6; border-radius: 14px; padding: 16px 18px; color: #4b3b12; }
+    .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    figure { margin: 0; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: #fff; }
+    figure img { width: 100%; height: 250px; object-fit: cover; display: block; background: #ddd; }
+    figcaption { padding: 11px 12px 13px; color: var(--muted); font-size: 14px; }
+    .footer { margin-top: 22px; color: var(--muted); text-align: center; font-size: 14px; }
+
+    .expense-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 15px;
+    }
+    .expense-table th,
+    .expense-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .expense-table th {
+      background: var(--accent-soft);
+      color: var(--text);
+      font-weight: 800;
+    }
+    .expense-table td.num,
+    .expense-table th.num {
+      text-align: right;
+      white-space: nowrap;
+    }
+    .expense-table tr.total-row td {
+      background: #f3f6fb;
+      font-weight: 800;
+    }
+    .expense-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+
+    .work-block { border: 1px solid var(--border); border-radius: 18px; padding: 18px; background: #fbfcfe; margin-bottom: 14px; }
+    .work-block h3 { margin: 0 0 12px; font-size: 20px; letter-spacing: -0.02em; }
+    .work-list { margin: 0; padding-left: 20px; color: var(--text); }
+    .work-list li { margin: 8px 0; }
+    .warning-box { border-left: 5px solid var(--warn); background: #fff8e6; border-radius: 14px; padding: 14px 16px; margin-top: 14px; color: #4b3b12; }
+
+    @media (max-width: 820px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .grid, .gallery { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .page { padding: 16px 10px 34px; }
+      .hero-inner, .section { padding: 18px; }
+      .grid, .gallery { grid-template-columns: 1fr; }
+      figure img { height: auto; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      .hero, .section { box-shadow: none; break-inside: avoid; }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      figure img { height: 190px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="badge">💡 Звіт про виконані роботи</div>
+          <h1>Ремонт та заміна освітлення у 2-му під’їзді</h1>
+          <p class="lead">
+            24.06.2026 виконано роботи з відновлення освітлення на поверхах біля ліфтів
+            та на сходових маршах. Мета робіт — щоб у під’їзді було безпечне та стабільне
+            освітлення для мешканців на всіх поверхах.
+          </p>
+        </div>
+        <img class="hero-photo" src="photo-01.jpg" alt="Новий плафон після ремонту освітлення">
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="summary">
+      <h2 id="summary">Коротко про результат</h2>
+      <div class="grid">
+        <div class="stat"><div class="icon">🏢</div><strong>7</strong><span>плафонів встановлено на поверхах</span></div>
+        <div class="stat"><div class="icon">🛗</div><strong>усі поверхи</strong><span>мають світло біля ліфтових зон</span></div>
+        <div class="stat"><div class="icon">🧰</div><strong>сходи</strong><span>відновлено освітлення на сходових маршах</span></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="done">
+      <h2 id="done">Що зроблено електриком</h2>
+      <ul class="done-list">
+        <li><span class="check">✓</span><span>Встановлено <strong>7 нових плафонів</strong> на поверхах другого під’їзду.</span></li>
+        <li><span class="check">✓</span><span>На сходах замінено лампи в плафонах, а в окремих місцях додатково виконано <strong>ремонт проводки</strong>.</span></li>
+        <li><span class="check">✓</span><span>Там, де плафони відсутні, доставлено або замінено лампи, щоб сходові зони також були освітлені.</span></li>
+        <li><span class="check">✓</span><span>У результаті на кожному поверсі біля ліфтів є світло, а також є світло на сходах на всіх поверхах.</span></li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="expenses">
+      <h2 id="expenses">Витрати по роботах</h2>
+      <table class="expense-table">
+        <thead>
+          <tr>
+            <th>Етап</th>
+            <th class="num">Матеріали</th>
+            <th class="num">Робота</th>
+            <th class="num">Разом</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>24.06.2026</td>
+            <td class="num">1 689 грн</td>
+            <td class="num">2 000 грн</td>
+            <td class="num">3 689 грн</td>
+          </tr>
+          <tr>
+            <td>26.06.2026</td>
+            <td class="num">485 грн</td>
+            <td class="num">1 500 грн</td>
+            <td class="num">1 985 грн</td>
+          </tr>
+          <tr class="total-row">
+            <td>Разом</td>
+            <td class="num">2 174 грн</td>
+            <td class="num">3 500 грн</td>
+            <td class="num">5 674 грн</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="expense-note">Підтвердження витрат: фіскальні чеки на матеріали та оплата роботи електрика.</p>
+    </section>
+
+    <section class="section" aria-labelledby="stage2">
+      <h2 id="stage2">Додаткові роботи 26.06.2026</h2>
+      <div class="work-block">
+        <h3>Що виконано</h3>
+        <ul class="work-list">
+          <li>Проведено світло та встановлено плафон у технічному приміщенні.</li>
+          <li>Встановлено 2 накладні розетки у технічному приміщенні.</li>
+          <li>Замінено лампу плафона на вході на сходи.</li>
+          <li>Замінено плафон між 1 і 2 поверхом на сходах.</li>
+          <li>Проведено ревізію кабелю, що виступає з підлоги на 4 поверсі.</li>
+        </ul>
+        <div class="warning-box">
+          За результатом ревізії кабелю на 4 поверсі: прибрати його повністю неможливо, оскільки він живить увесь стояк.
+          Потенційне рішення — перенести кабель ближче до стіни з бурінням балки перекриття приблизно на 1 метр.
+          Це потребує окремого рішення щодо доцільності таких робіт.
+        </div>
+      </div>
+      <div class="work-block">
+        <h3>Матеріали, що залишилися</h3>
+        <p style="margin:0;color:var(--muted);">Після виконаних робіт залишилося 5 LED-ламп і 1 плафон для подальшої заміни.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="next">
+      <h2 id="next">Що ще планується</h2>
+      <div class="note">
+        Надалі звичайні лампи розжарювання на сходах будемо поступово замінювати
+        на енергозберігаючі — у міру перегорання, щоб не доводилося міняти їх кожні два тижні.
+        Також за потреби буде використано залишок матеріалів: 5 LED-ламп і 1 плафон.
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="photos">
+      <h2 id="photos">Фотофіксація робіт</h2>
+      <div class="gallery">
+        <figure>
+          <img src="photo-01.jpg" alt="Новий плафон на поверсі біля входу до квартир">
+          <figcaption>Новий плафон на поверсі біля входу до квартир</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-02.jpg" alt="Стан одного зі старих світильників до/під час ремонту">
+          <figcaption>Стан одного зі старих світильників до/під час ремонту</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-03.jpg" alt="Робочий список електрика по поверхах">
+          <figcaption>Робочий список електрика по поверхах</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-04.jpg" alt="Встановлений плафон біля входу на поверх">
+          <figcaption>Встановлений плафон біля входу на поверх</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-05.jpg" alt="Встановлений плафон біля входу на поверх">
+          <figcaption>Встановлений плафон біля входу на поверх</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-06.jpg" alt="Старий світильник без повноцінного плафона — зона ремонту">
+          <figcaption>Старий світильник без повноцінного плафона — зона ремонту</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-07.jpg" alt="Новий плафон після ремонту проводки">
+          <figcaption>Новий плафон після ремонту проводки</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-08.jpg" alt="Новий плафон біля ліфтової зони">
+          <figcaption>Новий плафон біля ліфтової зони</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-09.jpg" alt="Сходова зона до відновлення освітлення">
+          <figcaption>Сходова зона до відновлення освітлення</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-10.jpg" alt="Новий плафон після заміни">
+          <figcaption>Новий плафон після заміни</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-11.jpg" alt="Закуплені плафони та LED-лампи для ремонту освітлення">
+          <figcaption>Закуплені плафони та LED-лампи для ремонту освітлення</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-12.jpg" alt="Фіскальний чек на матеріали — 1 689 грн">
+          <figcaption>Фіскальний чек на матеріали — 1 689 грн</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-13.jpg" alt="Заміна плафона між 1 і 2 поверхом на сходах">
+          <figcaption>Заміна плафона між 1 і 2 поверхом на сходах</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-14.jpg" alt="Заміна лампи в плафоні на вході на сходи, 1 поверх">
+          <figcaption>Заміна лампи в плафоні на вході на сходи, 1 поверх</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-15.jpg" alt="Залишок матеріалів: 5 ламп і 1 плафон для подальшої заміни">
+          <figcaption>Залишок матеріалів: 5 ламп і 1 плафон для подальшої заміни</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-16.jpg" alt="Прокладення кабелю до техприміщення">
+          <figcaption>Прокладення кабелю до техприміщення</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-17.jpg" alt="Плафон та 2 накладні розетки у технічному приміщенні">
+          <figcaption>Плафон та 2 накладні розетки у технічному приміщенні</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-18.jpg" alt="Ревізія кабелю, що виступає з підлоги на 4 поверсі">
+          <figcaption>Ревізія кабелю, що виступає з підлоги на 4 поверсі</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-19.jpg" alt="Ревізія кабелю, що виступає з підлоги на 4 поверсі">
+          <figcaption>Ревізія кабелю, що виступає з підлоги на 4 поверсі</figcaption>
+        </figure>
+        <figure>
+          <img src="photo-20.jpg" alt="Чек на додаткові матеріали — 485 грн">
+          <figcaption>Чек на додаткові матеріали — 485 грн</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <p class="footer">Звіт підготовлено для інформування мешканців 2-го під’їзду. Оновлено 26.06.2026.</p>
+  </main>
+</body>
+</html>
